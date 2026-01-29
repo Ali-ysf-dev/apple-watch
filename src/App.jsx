@@ -3,6 +3,7 @@ import "./App.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import FeatureSection from "./components/FeatureSection";
 import { featureSections } from "./data/sections.jsx";
@@ -105,6 +106,8 @@ function App() {
           />
         ))}
       </Suspense>
+
+      <Footer />
     </main>
   );
 }
