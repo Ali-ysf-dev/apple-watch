@@ -20,7 +20,7 @@ function Sence({ progress, onModelLoad }) {
   useEffect(() => {
     const updateCameraPosition = () => {
       const position = [
-        [3.5, 2.17, 3.7],
+        [3.0, 2.17, 3.7],
         [-3.7, 2.5,3.6],
         [3.7, 0.6,0.7],
         [0,2.5,3.6]
@@ -60,7 +60,7 @@ function Sence({ progress, onModelLoad }) {
   return (
     <>
     <PerspectiveCamera ref={cameraref} makeDefault near={0.1} far={1000} position={[3.4821563489882656, 1.219071606362784, 5.929245271644066]} />
-    <Environment preset="sunset" />
+    <Environment files="/venice_sunset_1k.hdr" />
     <Watch />
     
     </>
