@@ -1,27 +1,42 @@
 import { Canvas } from "@react-three/fiber";
 import Sence from "../Sence";
-import ContentCard from "./ContentCard";
+import heroBg from "../assets/whiteabstract.jpg";
+
 
 function HeroSection({ sceneRef, progress, onModelLoad, contentRef }) {
   return (
-    <section className="relative flex items-center justify-between h-screen">
-      <div ref={sceneRef} className="w-[50%] h-full z-1000">
-        <Canvas className="h-full w-full">
-          <Sence progress={progress} onModelLoad={onModelLoad} />
-        </Canvas>
-      </div>
-      <ContentCard ref={contentRef} contentOnLeft={false}>
-        <div className="space-y-4">
+    <section
+      className="relative flex h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${heroBg})` }}
+    >
+      {/* Wrapper so contentRef contains all hero .animate-in (left + right) for GSAP */}
+      <div ref={contentRef} className="contents" >
+        {/* Left: Apple Watch Ultra 2 + Built for extremes. — content at top */}
+        <div className="flex flex-row flex-1  items-start justify-start p-8 pt-20 lg:p-12 lg:pt-24 xl:p-16 xl:pt-32">
+        <div className="relative translate-x-[10%] space-y-4 pl-8 lg:pl-12 xl:pl-16">
           <p className="animate-in text-sm tracking-[0.3em] uppercase text-gray-500 font-medium">
             Apple Watch Ultra 2
           </p>
           <h1 className="animate-in text-5xl lg:text-6xl xl:text-7xl font-bold text-black leading-tight">
             Built for extremes.
-            <br />
-            <span className="text-gray-600">Designed for every day.</span>
           </h1>
         </div>
-        <p className="animate-in text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl">
+        </div>
+
+        {/* Center: 3D model */}
+        <div ref={sceneRef} className="flex flex-1 h-full min-w-0 z-[1000]">
+          <Canvas className="h-full w-full">
+            <Sence progress={progress} onModelLoad={onModelLoad} />
+          </Canvas>
+        </div>
+
+      {/* Right: rest of content */}
+      <div className="flex flex-1 flex-col justify-end p-8 pb-12 lg:p-12 lg:pb-16 xl:p-16 xl:pb-20">
+        <div className="relative w-[100%] text-wrap pr-8 lg:pr-12 xl:pr-16 -translate-x-[15%]">
+        <p className="animate-in text-1xl lg:text-3xl xl:text-5xl font-bold text-gray-600 leading-tight">
+          Designed for every day.
+        </p>
+        <p className="animate-in text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl mt-8">
           Experience the most capable Apple Watch ever. Engineered for
           adventure, precision, and performance in every moment.
         </p>
@@ -33,7 +48,9 @@ function HeroSection({ sceneRef, progress, onModelLoad, contentRef }) {
             Learn more
           </button>
         </div>
-      </ContentCard>
+        </div>
+        </div>
+      </div>
     </section>
   );
 }

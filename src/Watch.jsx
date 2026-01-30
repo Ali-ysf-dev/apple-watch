@@ -6,14 +6,13 @@ Source: https://sketchfab.com/3d-models/apple-watch-ultra-2-f33263c457664b439092
 Title: Apple Watch Ultra 2
 */
 
-import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function Watch(props) {
   const { nodes, materials } = useGLTF('/apple_watch_ultra_2.glb')
   return (
     <group  scale={[20,20,20]} {...props} dispose={null}>
-      <group scale={0.011}>
+      <group scale={0.01}>
         <mesh
           castShadow
           receiveShadow

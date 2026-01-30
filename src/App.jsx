@@ -35,9 +35,9 @@ function App() {
           },
         },
       })
-        .to(sceneRef.current, { ease: "none", x: "0vw", y: "100vh" })
-        .to(sceneRef.current, { ease: "none", x: "50vw", y: "200vh" })
-        .to(sceneRef.current, { ease: "none", x: "5vw", y: "300vh" });
+        .to(sceneRef.current, { ease: "none", x: "-30vw", y: "100vh" })
+        .to(sceneRef.current, { ease: "none", x: "30vw", y: "200vh" })
+        .to(sceneRef.current, { ease: "none", x: "-25vw", y: "300vh" });
     }, mainref);
 
     return () => ctx.revert();
