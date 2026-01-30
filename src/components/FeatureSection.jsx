@@ -1,9 +1,31 @@
 import ContentCard from "./ContentCard";
 import FeatureItem from "./FeatureItem";
 
-function FeatureSection({ contentRef, contentOnLeft = true, label, title, description, features, customContent }) {
+function FeatureSection({ id, contentRef, contentOnLeft = true, label, title, description, features, customContent }) {
+  const isPrecision = id === "precision";
   return (
-    <section className="relative flex items-center justify-between h-screen">
+    <section className={`relative flex items-center justify-between h-screen ${isPrecision ? "overflow-visible precision-merge-shadow" : ""}`}>
+      {/* Soft gradient/glow at the boundary between content and scene */}
+      <div className="section-boundary" aria-hidden />
+      {isPrecision && (
+        <>
+          <div
+            className="absolute inset-0 z-0"
+            style={{ background: "linear-gradient(to right, #ffffff, #96989E)" }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: "linear-gradient(to right, #ffffff, #96989E)",
+              filter: "blur(100px)",
+              opacity: 0.9,
+            }}
+            aria-hidden
+          />
+        </>
+      )}
+      <div className={`relative z-10 flex w-full items-center justify-between ${!isPrecision ? "" : ""}`} style={isPrecision ? { minHeight: "100vh" } : undefined}>
       {contentOnLeft && <div className="w-[50%]" aria-hidden />}
       <ContentCard ref={contentRef} contentOnLeft={contentOnLeft}>
         <div className="space-y-6">
@@ -27,6 +49,7 @@ function FeatureSection({ contentRef, contentOnLeft = true, label, title, descri
         )}
       </ContentCard>
       {!contentOnLeft && <div className="w-[50%] order-2" aria-hidden />}
+      </div>
     </section>
   );
 }

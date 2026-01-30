@@ -1,12 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import Sence from "../Sence";
-import heroBg from "../assets/whiteabstract.jpg";
+import heroBg from "../assets/whiteabstract2.jpg";
 
 
 function HeroSection({ sceneRef, progress, onModelLoad, contentRef }) {
   return (
     <section
-      className="relative flex h-screen bg-cover bg-center bg-no-repeat"
+      className="relative flex h-screen overflow-visible bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       {/* Wrapper so contentRef contains all hero .animate-in (left + right) for GSAP */}
@@ -23,12 +23,11 @@ function HeroSection({ sceneRef, progress, onModelLoad, contentRef }) {
         </div>
         </div>
 
-        {/* Center: 3D model */}
-        <div ref={sceneRef} className="flex flex-1 h-full min-w-0 z-[1000]">
-          <Canvas className="h-full w-full">
-            <Sence progress={progress} onModelLoad={onModelLoad} />
-          </Canvas>
-        </div>
+        {/* Center: spacer to keep three-column layout */}
+        <div className="flex-1 min-w-0" aria-hidden />
+
+        {/* Soft boundary: center | right content */}
+        <div className="section-boundary absolute left-[66.67%] top-0 bottom-0 w-12 -translate-x-1/2 z-[500] pointer-events-none" aria-hidden />
 
       {/* Right: rest of content */}
       <div className="flex flex-1 flex-col justify-end p-8 pb-12 lg:p-12 lg:pb-16 xl:p-16 xl:pb-20">
@@ -44,11 +43,27 @@ function HeroSection({ sceneRef, progress, onModelLoad, contentRef }) {
           <button className="px-8 py-3.5 rounded-full bg-black text-white font-semibold text-sm hover:bg-gray-800 transition-all duration-300 hover:scale-105">
             Buy now
           </button>
-          <button className="px-8 py-3.5 rounded-full border border-gray-300 text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-300 hover:scale-105">
+          <button className="px-8 py-3.5 rounded-full border bg-white text-black font-semibold text-sm hover:bg-black-100 transition-all duration-300 hover:scale-105">
             Learn more
           </button>
         </div>
         </div>
+        </div>
+      </div>
+
+      {/* Canvas: centered in hero section (2× middle third width), GSAP animates sceneRef inside */}
+      <div
+        className="absolute inset-y-0 left-1/2 z-[9999] h-full"
+        style={{
+          width: "66.67vw",
+          transform: "translateX(-50%)",
+          pointerEvents: "none",
+        }}
+      >
+        <div ref={sceneRef} className="absolute inset-0">
+          <Canvas className="h-full w-full" style={{ pointerEvents: "auto" }}>
+            <Sence progress={progress} onModelLoad={onModelLoad} />
+          </Canvas>
         </div>
       </div>
     </section>

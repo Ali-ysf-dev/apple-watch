@@ -14,16 +14,16 @@ function Sence({ progress, onModelLoad }) {
   }, [onModelLoad]);
 
   useFrame(() => {
-    console.log(cameraref.current.position);
-    cameraref.current.lookAt(0, 0, 0);
+    if (cameraref.current) cameraref.current.lookAt(0, 0, 0);
   });
   useEffect(() => {
     const updateCameraPosition = () => {
+      // Camera positions per scroll segment - kept far enough so model stays in frame (no cropping)
       const position = [
-        [3.0, 2.17, 3.7],
-        [-3.7, 2.5,3.6],
-        [3.7, 0.6,0.7],
-        [0,2.5,3.6]
+        [3.0, 2.17, 3.7],   // hero
+        [-3.7, 2.5, 3.6],   // precision
+        [2.6, 1.2, 2.8],    // durability (pulled back from 3.7,0.6,0.7 to avoid zoom/crop)
+        [0, 2.5, 3.6]       // display
       ];
       if(progress >=1){
         gsap.to(cameraref.current.position, {

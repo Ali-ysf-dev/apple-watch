@@ -76,7 +76,7 @@ function App() {
   }, [modelReady]);
 
   return (
-    <main ref={mainref} className="overflow-x-hidden bg-white">
+    <main ref={mainref} className="overflow-x-hidden" style={{ background: "linear-gradient(to right, #ffffff, #96989E)" }}>
       <Header />
 
       <Suspense
@@ -96,6 +96,7 @@ function App() {
         {featureSections.map((section, i) => (
           <FeatureSection
             key={section.id}
+            id={section.id}
             contentRef={featureContentRefs[i]}
             contentOnLeft={section.contentOnLeft}
             label={section.label}

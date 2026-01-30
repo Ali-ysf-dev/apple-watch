@@ -11,8 +11,8 @@ import { useGLTF } from '@react-three/drei'
 export function Watch(props) {
   const { nodes, materials } = useGLTF('/apple_watch_ultra_2.glb')
   return (
-    <group  scale={[20,20,20]} {...props} dispose={null}>
-      <group scale={0.01}>
+    <group  scale={[25,25,25]} {...props} dispose={null}>
+      <group scale={0.0105}>
         <mesh
           castShadow
           receiveShadow
