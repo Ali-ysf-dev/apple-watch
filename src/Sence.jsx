@@ -60,7 +60,7 @@ function Sence({ progress, onModelLoad }) {
   return (
     <>
     <PerspectiveCamera ref={cameraref} makeDefault near={0.1} far={1000} position={[3.4821563489882656, 1.219071606362784, 5.929245271644066]} />
-    <Environment files="/venice_sunset_1k.hdr" />
+    <Environment  preset="studio" background={false} />
     <Watch />
     
     </>
