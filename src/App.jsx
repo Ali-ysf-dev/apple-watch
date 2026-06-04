@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Suspense } from "react";
+import { useState, useRef, useEffect, useCallback, Suspense } from "react";
 import "./App.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,7 +22,14 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [modelReady, setModelReady] = useState(false);
 
+  const handleModelLoad = useCallback(() => {
+    setModelReady(true);
+  }, []);
+
+  // Scene + scroll timeline must run after Suspense mounts HeroSection (sceneRef was null on first paint)
   useEffect(() => {
+    if (!modelReady || !mainref.current || !sceneRef.current) return;
+
     const ctx = gsap.context(() => {
       gsap.timeline({
         scrollTrigger: {
@@ -30,6 +37,7 @@ function App() {
           start: "top top",
           end: "bottom bottom",
           scrub: 1,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             setProgress(self.progress);
           },
@@ -40,8 +48,10 @@ function App() {
         .to(sceneRef.current, { ease: "none", x: "-25vw", y: "300vh" });
     }, mainref);
 
+    ScrollTrigger.refresh();
+
     return () => ctx.revert();
-  }, []);
+  }, [modelReady]);
 
   useEffect(() => {
     if (!modelReady) return;
@@ -71,6 +81,8 @@ function App() {
       });
     }, mainref);
 
+    ScrollTrigger.refresh();
+
     return () => ctx.revert();
   // eslint-disable-next-line react-hooks/exhaustive-deps -- refs are stable
   }, [modelReady]);
@@ -89,7 +101,7 @@ function App() {
         <HeroSection
           sceneRef={sceneRef}
           progress={progress}
-          onModelLoad={() => setTimeout(() => setModelReady(true), 500)}
+          onModelLoad={handleModelLoad}
           contentRef={heroContentRef}
         />
 
