@@ -1,5 +1,5 @@
-
 import { createRoot } from 'react-dom/client'
+import './lib/dracoSetup.js'
 import './index.css'
 import App from './App.jsx'
 

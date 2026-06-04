@@ -1,3 +1,13 @@
+# Apple Watch Ultra 2 — 3D landing page
+
+## 3D model (Draco)
+
+1. The app loads `public/apple_watch.glb` (your Draco-compressed model).
+2. To re-compress from a source file: save the uncompressed GLB as `public/apple_watch_source.glb`, then run `npm run compress-model`.
+3. Draco decoding is configured in `src/lib/dracoSetup.js` via `@react-three/drei` `useGLTF`.
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
